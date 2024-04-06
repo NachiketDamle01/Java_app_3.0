@@ -107,6 +107,15 @@ pipeline{
                    dockerImageCleanup("${params.ImageName}","${params.ImageTag}","${params.DockerHubUser}")
                }
             }
-        }      
+        }
+        stage('Push Jfrog artifactory : Jfrog '){
+         when { expression {  params.action == 'create' } }
+            steps{
+               script{
+                   
+                   pushJfrog()
+               }
+            }
+        }
     }
 }
